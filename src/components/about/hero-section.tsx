@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 // Custom items here
-import { RGBButton } from "@/components/rgb-button";
+import { RGBButton } from "@/components/custom/rgb-button";
 
 export default function HeroSection() {
   return (
@@ -64,10 +64,9 @@ export default function HeroSection() {
             Louien Franco
           </h1>
 
-          <p className="text-muted-foreground text-base md:text-xl max-w-[42rem]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Elig
-            doloremque mollitia fugiat omnis! Porro facilis quo animi
-            consequatur. Explicabo.
+          <p className="font-mono text-muted-foreground text-base md:text-lg max-w-[42rem]">
+            I craft modern, responsive interfaces that blend design and
+            functionality to deliver seamless user experiences.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
