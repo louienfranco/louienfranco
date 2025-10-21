@@ -70,7 +70,9 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <RGBButton variant="pulse">Know More</RGBButton>
+            <Link href="#about" passHref>
+              <RGBButton variant="pulse">Know More</RGBButton>
+            </Link>
             {/* <Button size="lg" variant="outline" className="w-full sm:w-auto">
               <span>Tech Stack</span>
             </Button> */}
