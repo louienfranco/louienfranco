@@ -2,6 +2,8 @@ import HeroSection from "@/components/about/hero-section";
 import { DottedGridPattern } from "@/components/custom/bg-style";
 import Toggle from "@/components/theme/toggle-theme";
 
+import AboutSection from "@/components/about/about";
+
 export default function Home() {
   return (
     <>
@@ -22,6 +24,8 @@ export default function Home() {
         />
         <HeroSection />
       </main>
+
+      <AboutSection />
     </>
   );
 }
