@@ -10,8 +10,9 @@ export default function Toggle() {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <Button
-        variant="outline"
+        variant="ghost"
         size="icon"
+        className="rounded-full bg-background text-foreground border border-border shadow-sm hover:bg-muted/60 transition-colors"
         onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         aria-label="Toggle theme"
       >

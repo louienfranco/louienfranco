@@ -5,6 +5,9 @@ import "./globals.css";
 // Theme Provider for managing light/dark mode
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
+// Custom Site Header
+import SiteHeader from "@/components/custom/site-header";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,6 +39,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          {/* Site Header */}
+          <SiteHeader />
           {children}
         </ThemeProvider>
       </body>

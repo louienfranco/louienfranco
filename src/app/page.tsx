@@ -1,13 +1,12 @@
 import HeroSection from "@/components/about/hero-section";
 import { DottedGridPattern } from "@/components/custom/bg-style";
-import Toggle from "@/components/theme/toggle-theme";
 
 import AboutSection from "@/components/about/about";
+import Footer from "@/components/about/footer";
 
 export default function Home() {
   return (
     <>
-      <Toggle />
       <main className="font-sans flex min-h-screen flex-col">
         <DottedGridPattern
           width={28}
@@ -23,9 +22,9 @@ export default function Home() {
           className="[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]"
         />
         <HeroSection />
+        <AboutSection />
+        <Footer />
       </main>
-
-      <AboutSection />
     </>
   );
 }
