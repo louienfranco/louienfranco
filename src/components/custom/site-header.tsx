@@ -5,18 +5,121 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Sun, Moon } from "lucide-react";
-// Make sure this points to your MobileSidebar file
-import MobileSidebar from "@/components/custom/mobile-sidebar";
+import { Separator } from "@/components/ui/separator";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  Sun,
+  Moon,
+  Menu,
+  Home as HomeIcon,
+  BookOpen,
+  LayoutPanelLeft,
+  Sparkles,
+  Github,
+  type LucideIcon,
+} from "lucide-react";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/learn", label: "Learn" },
-  { href: "/templates", label: "Templates" },
-  { href: "/showcase", label: "Showcase" },
-  { href: "/blog", label: "Blog" },
+/* One source of truth */
+type NavLink = { href: string; label: string; icon?: LucideIcon };
+
+const links: NavLink[] = [
+  { href: "/", label: "Home", icon: HomeIcon },
+  { href: "/learn", label: "Learn", icon: BookOpen },
+  { href: "/templates", label: "Templates", icon: LayoutPanelLeft },
+  { href: "/showcase", label: "Showcase", icon: Sparkles },
+  { href: "/blog", label: "Blog", icon: BookOpen },
 ];
 
+/* Mobile sidebar (inline) */
+function MobileSidebar() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="md:hidden">
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger asChild>
+          <Button variant="ghost" size="icon" aria-label="Open sidebar">
+            <Menu className="h-5 w-5" />
+          </Button>
+        </SheetTrigger>
+
+        <SheetContent
+          side="left"
+          className="w-80 sm:w-96 p-0"
+          aria-label="Mobile sidebar"
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Mobile sidebar</SheetTitle>
+          </SheetHeader>
+
+          <div className="flex h-full flex-col">
+            <div className="flex items-center gap-2 px-4 pt-4 pb-2">
+              <span
+                className="inline-block h-5 w-5 rounded bg-foreground/90"
+                aria-hidden
+              />
+              <span className="font-semibold tracking-tight">luwen</span>
+            </div>
+
+            <Separator />
+
+            <nav className="px-2 py-2">
+              {links.map(({ href, label, icon: Icon }) => {
+                const active = pathname === href;
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={() => setOpen(false)}
+                    className={[
+                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+                      active
+                        ? "bg-muted text-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60",
+                    ].join(" ")}
+                  >
+                    {Icon ? <Icon className="h-4 w-4" /> : null}
+                    {label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <Separator className="my-2" />
+
+            <div className="px-4 py-3">
+              <Button asChild variant="outline" className="w-full gap-2">
+                <Link
+                  href="https://github.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Github className="h-4 w-4" />
+                  GitHub
+                </Link>
+              </Button>
+            </div>
+
+            <div className="mt-auto px-4 pb-4 pt-2">
+              <p className="text-xs text-muted-foreground">
+                Tip: Theme toggle is in the top bar.
+              </p>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </div>
+  );
+}
+
+/* Floating “Dynamic Island” header */
 export default function SiteHeader() {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
@@ -30,10 +133,8 @@ export default function SiteHeader() {
   }, []);
 
   return (
-    // Floating wrapper (no full-width bar)
     <header className="font-sans pointer-events-none fixed inset-x-0 top-3 z-50 sm:top-4 md:top-6">
       <div className="mx-auto w-full max-w-3xl px-3 sm:px-4 pointer-events-auto">
-        {/* Oval pill container */}
         <div
           className={[
             "flex h-12 items-center gap-2 rounded-full border px-2 pl-3 pr-2",
@@ -41,11 +142,13 @@ export default function SiteHeader() {
             scrolled ? "shadow-lg" : "shadow-sm",
           ].join(" ")}
         >
-          {/* Left: Mobile menu (only on mobile) */}
           <MobileSidebar />
 
-          {/* Brand */}
-          <Link href="/" className="font-semibold tracking-tight">
+          <Link
+            href="/"
+            className="font-semibold tracking-tight"
+            aria-label="Home"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
@@ -63,14 +166,14 @@ export default function SiteHeader() {
             </svg>
           </Link>
 
-          {/* Desktop nav */}
+          {/* Desktop nav uses the same links array (ignores icon) */}
           <nav className="mx-2 hidden md:flex items-center gap-4">
-            {links.map((item) => {
-              const active = pathname === item.href;
+            {links.map(({ href, label }) => {
+              const active = pathname === href;
               return (
                 <Link
-                  key={item.href}
-                  href={item.href}
+                  key={href}
+                  href={href}
                   className={[
                     "rounded-full px-3 py-1.5 text-sm transition-colors",
                     active
@@ -79,13 +182,12 @@ export default function SiteHeader() {
                   ].join(" ")}
                   aria-current={active ? "page" : undefined}
                 >
-                  {item.label}
+                  {label}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Right: Theme toggle */}
           <div className="ml-auto">
             <Button
               variant="ghost"
