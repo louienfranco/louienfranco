@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 
 // Custom Site Header
 import SiteHeader from "@/components/custom/site-header";
+import Footer from "@/components/about/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,7 @@ export default function RootLayout({
           <SiteHeader />
           {children}
         </ThemeProvider>
+        <Footer />
       </body>
     </html>
   );

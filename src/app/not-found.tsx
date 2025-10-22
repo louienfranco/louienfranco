@@ -15,11 +15,11 @@ export default function NotFound() {
         </div>
 
         <h1 id="not-found-title" className="text-2xl md:text-3xl font-bold">
-          This page is under development
+          Under Development
         </h1>
 
         <p className="text-sm text-muted-foreground">
-          We’re working on it. Please check back soon.
+          I’m working on it. Please check back soon.
         </p>
 
         <div className="pt-2">

@@ -2,7 +2,6 @@ import HeroSection from "@/components/about/hero-section";
 import { DottedGridPattern } from "@/components/custom/bg-style";
 
 import AboutSection from "@/components/about/about";
-import Footer from "@/components/about/footer";
 
 export default function Home() {
   return (
@@ -23,7 +22,6 @@ export default function Home() {
         />
         <HeroSection />
         <AboutSection />
-        <Footer />
       </main>
     </>
   );

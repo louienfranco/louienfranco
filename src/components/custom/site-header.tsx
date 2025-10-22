@@ -18,7 +18,8 @@ import {
   Moon,
   Menu,
   Home as HomeIcon,
-  BookOpen,
+  Mail,
+  FolderGit2,
   LayoutPanelLeft,
   Sparkles,
   Github,
@@ -30,10 +31,10 @@ type NavLink = { href: string; label: string; icon?: LucideIcon };
 
 const links: NavLink[] = [
   { href: "/", label: "Home", icon: HomeIcon },
-  { href: "/learn", label: "Learn", icon: BookOpen },
+  { href: "/projects", label: "Projects", icon: FolderGit2 },
   { href: "/templates", label: "Templates", icon: LayoutPanelLeft },
   { href: "/showcase", label: "Showcase", icon: Sparkles },
-  { href: "/blog", label: "Blog", icon: BookOpen },
+  { href: "/contact", label: "Contact", icon: Mail },
 ];
 
 /* Mobile sidebar (inline) */
